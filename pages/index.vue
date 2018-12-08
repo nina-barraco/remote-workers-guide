@@ -50,6 +50,7 @@ export default {
       ]
     }
   },
+  
   mounted() {
     var that = this;
     let x = setInterval(() => {
