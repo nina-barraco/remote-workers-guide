@@ -24,7 +24,7 @@
   <!-- <div :style="{'background-image': `url(${require('getImageUrl')})`}" style="width: 100%; height: 100px;">
   </div> -->
 
-    <div class="container" >
+    <b-container>
 
       <div class="stars"></div>
 
@@ -94,35 +94,32 @@
         </div>
       </div>
 
+      <b-row align-h="center">
+        <b-col cols="8">
+          <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+            <b-form-group id="name">
+              <b-form-input id="name1"
+                            type="text"
+                            v-model="form.name"
+                            required
+                            placeholder="First name and last initial">
+              </b-form-input>
+            </b-form-group>
+            <b-form-group id="review">
+              <b-form-textarea id="message"
+                     v-model="form.message"
+                     required
+                     placeholder="Write review here"
+                     :rows="5"
+                     :max-rows="10">
+              </b-form-textarea> 
+            </b-form-group>           
+            <b-button type="submit" variant="secondary">Submit</b-button>
+          </b-form>
+        </b-col>
+      </b-row>
 
-      <div>
-        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-          <b-form-group id="name"
-                        label="Name:"
-                        label-for="exampleInput1">
-            <b-form-input id="name1"
-                          type="text"
-                          v-model="form.name"
-                          required
-                          placeholder="First name and last initial">
-            </b-form-input>
-          </b-form-group>
-          <b-form-group id="message"
-                        label="Review:"
-                        label-for="exampleInput2">
-            <b-form-input id="message1"
-                          type="text"
-                          v-model="form.message"
-                          required
-                          placeholder="Write review here">
-            </b-form-input>
-          </b-form-group>
-          
-          <b-button type="submit" variant="secondary">Submit</b-button>
-        </b-form>
-      </div>
-
-    </div>
+   </b-container>
   </section>
 </template>
 
@@ -183,16 +180,15 @@ export default {
   },
   methods: {
     onSubmit (evt) {
+      //what does evt.preventDefault() do? Couldn't find anything good on it.
       evt.preventDefault();
       alert(JSON.stringify(this.form));
     },
     onReset (evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.email = '';
       this.form.name = '';
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.message = '';
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => { this.show = true });
