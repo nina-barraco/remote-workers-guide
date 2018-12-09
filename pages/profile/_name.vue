@@ -40,6 +40,7 @@
 
       <hr>
 
+      <!-- manny code on review form -->
       <!-- <div class="reviews"></div>
       <h1 class="body-header">
         reviews
@@ -70,8 +71,8 @@
         reviews
       </h1>
       <ul>
-        <li>
-          {{ reviews.name }}
+        <li v-for="value in object">
+          {{ reviews.name }} says {{ reviews.message }}
         </li>
       </ul>
       <hr>
@@ -80,14 +81,45 @@
           <h1 class="body-header">submit a review</h1>
           <form class="location-form">
             <div class="form-group">
-              <input type="name" class="form-control" id="name" v-model="name" placeholder="First name and last initial">
+              <input type="name" class="form-control" id="validationCustom01" v-model="name" placeholder="First name and last initial" required>
+              <div class="invalid-feedback">
+                Please provide a valid name.
+              </div>
             </div>
             <div class="form-group">
-              <textarea class="business-review form-control" id="business-review" v-model="message" placeholder="Write review here" rows="3"></textarea>
+              <textarea class="business-review form-control" id="business-review" v-model="message" placeholder="Write review here" rows="3" required></textarea>
             </div>
             <button type="submit" @click.prevent="submitReview" class="btn btn-secondary">Submit</button>
           </form>
         </div>
+      </div>
+
+
+      <div>
+        <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+          <b-form-group id="name"
+                        label="Name:"
+                        label-for="exampleInput1">
+            <b-form-input id="name1"
+                          type="text"
+                          v-model="form.name"
+                          required
+                          placeholder="First name and last initial">
+            </b-form-input>
+          </b-form-group>
+          <b-form-group id="message"
+                        label="Review:"
+                        label-for="exampleInput2">
+            <b-form-input id="message1"
+                          type="text"
+                          v-model="form.message"
+                          required
+                          placeholder="Write review here">
+            </b-form-input>
+          </b-form-group>
+          
+          <b-button type="submit" variant="secondary">Submit</b-button>
+        </b-form>
       </div>
 
     </div>
@@ -97,7 +129,7 @@
 
 <script>
 
-import profiles from "~/assets/profiles.json";
+import profiles from "~/static/profiles.json";
 
 export default {
   data() {
@@ -106,6 +138,17 @@ export default {
       name: '',
       message: '',
       reviews: [],
+      form: {
+        email: '',
+        name: '',
+        food: null,
+        checked: []
+      },
+      foods: [
+        { text: 'Select One', value: null },
+        'Carrots', 'Beans', 'Tomatoes', 'Corn'
+      ],
+      show: true
       // uploadImage: {
       //   background: 'red'
       // }
@@ -125,13 +168,36 @@ export default {
   },
   methods: {
     submitReview () {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
       console.log(this.name);
       console.log(this.message);
-      // this.reviews.push(
-      //   name: this.name
-      // );
+      this.reviews.push({
+        name: this.name,
+        message: this.message
+      });
+    },
+    nameChanged() {
+      console.log(this.name)
     }
   },
+  methods: {
+    onSubmit (evt) {
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
+    },
+    onReset (evt) {
+      evt.preventDefault();
+      /* Reset our form values */
+      this.form.email = '';
+      this.form.name = '';
+      this.form.food = null;
+      this.form.checked = [];
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false;
+      this.$nextTick(() => { this.show = true });
+    }
+  }
 }
 
 //store info in reviews
@@ -143,7 +209,7 @@ export default {
   //   }
   // }
 
-
+//manny code for review form
   // methods: {
   //   increaseWifi() {
   //     console.log(this.profile.wifi)

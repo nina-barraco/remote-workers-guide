@@ -31,8 +31,7 @@
       </div>
       <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
-    </div>
-  
+    </div> 
 
   </section>
 </template>
