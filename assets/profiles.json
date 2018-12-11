@@ -2,7 +2,7 @@
     {
         "name": "the bottom line",
         "slug": "the-bottom-line",
-        "image": "/_nuxt/assets/The_Bottom_Line.0.0.jpeg",
+        "image": "/The_Bottom_Line.0.0.jpeg", 
         "rating": "4",
         "description": "Neighborhood coffeehouse with open-mike nights serving espresso drinks, tea & pastries in cozy digs.",
         "wifi": "5",

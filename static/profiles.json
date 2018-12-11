@@ -2,7 +2,7 @@
     {
         "name": "the bottom line",
         "slug": "the-bottom-line",
-        "image": "/_nuxt/assets/The_Bottom_Line.0.0.jpeg",
+        "image": "url('/The_Bottom_Line.0.0.jpeg')",
         "rating": "4",
         "description": "Neighborhood coffeehouse with open-mike nights serving espresso drinks, tea & pastries in cozy digs.",
         "wifi": "5",
@@ -14,7 +14,7 @@
     {
         "name": "the red hook",
         "slug": "the-red-hook",
-        "image": "/_nuxt/assets/The_Red_Hook_by_Sandi-Heaselgrave.jpg",
+        "image": "url('/The_Red_Hook_by_Sandi-Heaselgrave.jpeg')",
         "rating": "5",
         "description": "Hot java drinks & desserts in airy, bright surrounds featuring wooden banquettes & white walls.",
         "wifi": "5",
@@ -26,6 +26,7 @@
     {
         "name": "cafe 1923",
         "slug": "cafe-1923",
+        "image": "url('/Cafe1923int.0.jpeg')",
         "rating": "5",
         "description": "Hip, bustling spot for coffee, desserts & sandwiches featuring bookcases & vintage oak shelving.",
         "wifi": "5",
@@ -37,6 +38,7 @@
     {
         "name": "astro coffee",
         "slug": "astro-coffee",
+        "image": "url('/astrocoffeedetroit1753.jpg')",
         "rating": "3",
         "description": "Small, cozy cafe serving a variety of coffee & tea plus locally sourced baked goods & sandwiches.",
         "wifi": "1",
@@ -47,7 +49,8 @@
     },
     {
         "name": "great lakes coffee roasting company",
-        "slug": "great-lakes-coffee-roasting-company",
+        "slug": "great-lakes-coffee",
+        "image": "url('/greatlakescoffee.jpeg')",
         "rating": "3",
         "description": "Cafe furnished with reclaimed wood & exposed ducts serving micro-roasted coffees, beer & snacks.",
         "wifi": "3",
@@ -59,6 +62,7 @@
     {
         "name": "socra tea",
         "slug": "socra-tea",
+        "image": "url('/socratea.JPG')",
         "rating": "4",
         "description": "Trendy & cozy hidden in the back walking area off the busy streets. Specialty teas & deserts, including gluten free!",
         "wifi": "5",
@@ -69,7 +73,8 @@
     },
     {
         "name": "dessert oasis coffee roasters",
-        "slug": "dessert-oasis-coffee-roasters",
+        "slug": "dessert-oasis",
+        "image": "url('/dessertoasis.jpg')",
         "rating": "4",
         "wifi": "5",
         "description": "Comfortable coffee shop downtown with a small selection of food.",
@@ -80,7 +85,8 @@
     },
     {
         "name": "avalon cafe and bakery downtown",
-        "slug": "avalon-cafe-and-bakery-downtown",
+        "slug": "avalon",
+        "image": "url('/avalon-bakery-downtown.jpg')",
         "rating": "3",
         "description": "Casual counter serve for salads, sandwiches & organic, housemade pastries & fresh breads.",
         "wifi": "5",
@@ -91,7 +97,8 @@
     },
     {
         "name": "DIA kresge court",
-        "slug": "DIA-kresge-court",        
+        "slug": "DIA",
+        "image": "url('/dia_5.jpg')",        
         "rating": "4",
         "description": "Atrium cafe at the Detroit Institute of Arts offering sandwiches, salads, pastries & coffee.",
         "wifi": "4",
@@ -102,7 +109,8 @@
     },
     {
         "name": "bikes and coffee",
-        "slug": "bikes-and-coffee",        
+        "slug": "bikes-and-coffee",
+        "image": "url('/BikesAndCoffee_113.0.jpg')",        
         "rating": "4",
         "description": "Small neighborhood coffee shop also offering bike repair services.",
         "wifi": "5",

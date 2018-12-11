@@ -1,28 +1,14 @@
 <template>
   <section v-if="profile">
 
-    <!-- <div class="image">
-      <img v-bind:src="profile.image">
-    </div> -->
+  <header>
+    <div class=headerImage v-bind:style="{ backgroundImage: profile.image }">
+      <b-container>
+        <h1>{{ profile.name }}</h1>
+      </b-container>
+    </div>
 
-  <b-jumbotron fluid class="jumbotron" v-bind:src="profile.image">
-    <img v-bind:src="profile.image" />
-    <template slot="header" class="jumbotronHeader">
-      {{ profile.image }}
-      {{ profile.name }}
-    </template>
-    <template slot="lead">
-      {{ profile.rating }}
-    </template>
-  </b-jumbotron>
-
-  <!-- <div class="jumbotron" v-bind:src="profile.image">
-    <h1 class="display-4 jumbotronHeader"> {{ profile.name }}</h1>
-    <p class="lead"> {{ profile.rating }}</p>
-  </div> -->
-
-  <!-- <div :style="{'background-image': `url(${require('getImageUrl')})`}" style="width: 100%; height: 100px;">
-  </div> -->
+  </header>
 
     <b-container>
 
@@ -72,31 +58,15 @@
       </h1>
       <ul>
         <li v-for="value in object">
-          {{ reviews.name }} says {{ reviews.message }}
+          {{ name }} says {{ message }}
         </li>
       </ul>
+
       <hr>
-      <div class="row d-flex justify-content-center submit-review">
-        <div class="col-8">
-          <h1 class="body-header">submit a review</h1>
-          <form class="location-form">
-            <div class="form-group">
-              <input type="name" class="form-control" id="validationCustom01" v-model="name" placeholder="First name and last initial" required>
-              <div class="invalid-feedback">
-                Please provide a valid name.
-              </div>
-            </div>
-            <div class="form-group">
-              <textarea class="business-review form-control" id="business-review" v-model="message" placeholder="Write review here" rows="3" required></textarea>
-            </div>
-            <button type="submit" @click.prevent="submitReview" class="btn btn-secondary">Submit</button>
-          </form>
-        </div>
-      </div>
 
       <b-row align-h="center">
-        <b-col cols="8">
-          <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <b-col xl="8" md="9">
+          <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
             <b-form-group id="name">
               <b-form-input id="name1"
                             type="text"
@@ -132,19 +102,13 @@ export default {
   data() {
     return {
       profile: null,
-      name: '',
-      message: '',
+      // name: '',
+      // message: '',
       reviews: [],
       form: {
-        email: '',
         name: '',
-        food: null,
-        checked: []
+        message: ''
       },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots', 'Beans', 'Tomatoes', 'Corn'
-      ],
       show: true
       // uploadImage: {
       //   background: 'red'
@@ -163,26 +127,47 @@ export default {
       //this.profiles = profiles;
     }
   },
-  methods: {
-    submitReview () {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-      console.log(this.name);
-      console.log(this.message);
-      this.reviews.push({
-        name: this.name,
-        message: this.message
-      });
-    },
-    nameChanged() {
-      console.log(this.name)
-    }
-  },
+  // methods: {
+  //   submitReview () {
+  //     evt.preventDefault();
+  //     alert(JSON.stringify(this.form));
+  //     console.log(this.name);
+  //     console.log(this.message);
+  //     this.reviews.push({
+  //       name: this.name,
+  //       message: this.message
+  //     });
+  //   },
+  //   nameChanged() {
+  //     console.log(this.name)
+  //   }
+  // },
+//   methods: {
+//     onSubmit (evt) {
+//       //what does evt.preventDefault() do? Couldn't find anything good on it.
+//       evt.preventDefault();
+//       alert(JSON.stringify(this.form));
+//     },
+//     onReset (evt) {
+//       evt.preventDefault();
+//       /* Reset our form values */
+//       this.form.name = '';
+//       this.form.message = '';
+//       /* Trick to reset/clear native browser form validation state */
+//       this.show = false;
+//       this.$nextTick(() => { this.show = true });
+//     }
+//   }
+// }
   methods: {
     onSubmit (evt) {
       //what does evt.preventDefault() do? Couldn't find anything good on it.
-      evt.preventDefault();
+      //evt.preventDefault();
       alert(JSON.stringify(this.form));
+      this.reviews.push({
+        name: this.form.name,
+        message: this.form.message
+      });
     },
     onReset (evt) {
       evt.preventDefault();
@@ -196,8 +181,7 @@ export default {
   }
 }
 
-//store info in reviews
-
+//another attempt at making the images change
   // methods: {
   //   uploadImage () {
   //     console.log(this.profile.image)
@@ -205,13 +189,13 @@ export default {
   //   }
   // }
 
-//manny code for review form
   // methods: {
   //   increaseWifi() {
   //     console.log(this.profile.wifi)
   //     this.profile.wifi = this.profile.wifi + 1;
   //   },
 
+//nina code for review form
 //   methods: {
 //     submitReview() {
 //       console.log(this.name);
@@ -227,11 +211,99 @@ export default {
 //   }
 // }
 
-// when you submit a review, it will display in the reviews section with your name.
-
-// when submit button is clicked, display info in reviews. 
+</script>
 
 
+<style>
+
+body {
+  background-color: #F2F2F2;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: bolder;
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 690px) {
+  h1 {
+    font-size: 3rem;
+  } 
+}
+
+/* .jumbotron {
+  position: relative;
+}
+.jumbotron .container {
+  height: 100%;
+}
+.jumbotron-inner {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+.headerImage {
+  height: 50vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.business-description {
+  font-family: 'DIN 2014', sans-serif;
+  font-size: 6vh;
+  color: #ACACAC;
+}
+
+@media (max-width: 690px) {
+  .business-description {
+    font-size: 5vh;
+  } 
+}
+
+hr {
+  border: 1px solid rgb(255, 122, 122);
+}
+
+h3 {
+  font-family: 'DIN 2014', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  color: #ACACAC;
+}
+
+.body-header {
+  color: #707070;
+  padding-bottom: 8%;
+}
+
+.submit-review {
+  width: 100%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+#business-review {
+  width: 100%;
+  height: 10rem;
+}
+
+</style>
 
 // Nina
 // import profiles from "~/assets/profiles.json";
@@ -269,66 +341,3 @@ export default {
 	// };
 	// ajax.open("GET", "~assets/profiles.json");
 	// ajax.send();
-
-</script>
-
-
-<style>
-
-body {
-  background-color: #F2F2F2;
-}
-
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  font-size: 3rem;
-  color: rgb(255, 122, 122);
-  text-align: center;
-}
-
-/* .jumbotron {
-  background-image: url("~assets/The_Bottom_Line.0.0.jpeg");
-} */
-
-.jumbotronHeader {
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  font-size: 3vw;
-  text-align: left;
-}
-
-.business-description {
-  font-family: 'DIN 2014', sans-serif;
-  font-size: 6vh;
-  color: #ACACAC;
-}
-
-hr {
-  border: 1px solid rgb(255, 122, 122);
-}
-
-h3 {
-  font-family: 'DIN 2014', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .2rem;
-  color: #ACACAC;
-}
-
-.body-header {
-  color: #707070;
-  padding-bottom: 8%;
-}
-
-.submit-review {
-  width: 100%;
-  margin-top: 5%;
-  margin-bottom: 10%;
-}
-
-#business-review {
-  width: 100%;
-  height: 10rem;
-}
-
-</style>
