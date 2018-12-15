@@ -64,6 +64,9 @@
 
       <hr>
 
+      <h1 class="body-header">
+        submit a review
+      </h1>
       <b-row align-h="center">
         <b-col xl="8" md="9">
           <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
@@ -88,6 +91,8 @@
           </b-form>
         </b-col>
       </b-row>
+
+    <a class="back-button" href='/'>Return to Map</a>
 
    </b-container>
   </section>
@@ -120,13 +125,13 @@ export default {
     console.log(this.$route.params.name)
     let currentProfile = profiles.find(profile => profile.slug === this.$route.params.name);
     console.log(currentProfile)
-    if(!currentProfile) {
-      //this profile doesn't exist
+    if(currentProfile) {
+      this.profile = currentProfile;
     } else {
-      this.profile = currentProfile; 
-      //this.profiles = profiles;
+      alert("This page does not exist.");
     }
   },
+
   // methods: {
   //   submitReview () {
   //     evt.preventDefault();
@@ -234,29 +239,14 @@ h1 {
   } 
 }
 
-/* .jumbotron {
-  position: relative;
-}
-.jumbotron .container {
-  height: 100%;
-}
-.jumbotron-inner {
-  height: 100%;
-  width: 100%;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-  background-size: cover;
-  background-position: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-} */
-
 .headerImage {
-  height: 50vh;
+  height: 65vh;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -264,8 +254,23 @@ h1 {
   margin-bottom: 5%;
 }
 
+.back-button {
+  text-decoration: none;
+  font-family: 'DIN 2014', sans-serif;
+  color: rgb(255, 122, 122);
+  font-size: 4vh;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10%;
+}
+
 .business-description {
   font-family: 'DIN 2014', sans-serif;
+  font-weight: 300;
   font-size: 6vh;
   color: #ACACAC;
 }
@@ -278,6 +283,8 @@ h1 {
 
 hr {
   border: 1px solid rgb(255, 122, 122);
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 h3 {
@@ -289,7 +296,7 @@ h3 {
 
 .body-header {
   color: #707070;
-  padding-bottom: 8%;
+  padding-bottom: 5%;
 }
 
 .submit-review {

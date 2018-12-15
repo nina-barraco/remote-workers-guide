@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import profiles from "~/static/profiles.json";
 
 export default {
   head () {
@@ -46,10 +47,31 @@ export default {
       ],
       link: [
         { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.3.4/dist/leaflet.css' }
-      ]
+      ],
+      search: '',
+      // postList : [
+      //   profile.name
+      // ],
+      profile: null,
+      reviews: [],
+      form: {
+        name: '',
+        message: ''
+      },
+      show: true
     }
   },
-  
+  mounted() {
+    
+    console.log(this.$route.params.name)
+    let currentProfile = profiles.find(profile => profile.slug === this.$route.params.name);
+    console.log(currentProfile)
+    if(currentProfile) {
+      this.profile = currentProfile;
+    } else {
+      alert("This page does not exist.");
+    }
+  },
   mounted() {
     var that = this;
     let x = setInterval(() => {
@@ -68,8 +90,41 @@ export default {
           id: 'mapbox.streets',
           accessToken: 'your.mapbox.access.token'
       }).addTo(mymap);
+      var bottomLine = L.marker([42.3514, -83.0692]).addTo(mymap);
+      bottomLine.bindPopup("<img src='~/static/The_Bottom_Line.0.0.jpeg'><a href='profile/the-bottom-line'>The Bottom Line</a><br>Neighborhood coffeehouse with open-mike nights serving espresso drinks, tea & pastries in cozy digs.");
+      var redHook = L.marker([42.3552, -82.9971]).addTo(mymap);
+      redHook.bindPopup("<a href='profile/the-red-hook'>The Red Hook</a><br>Hot java drinks & desserts in airy, bright surrounds featuring wooden banquettes & white walls.");
+      var cafe1923 = L.marker([42.3919, -83.0601]).addTo(mymap);
+      cafe1923.bindPopup("<a href='profile/cafe-1923'>Cafe 1923</a><br>Hip, bustling spot for coffee, desserts & sandwiches featuring bookcases & vintage oak shelving.");
+      var astroCoffee = L.marker([42.3316, -83.0757]).addTo(mymap);
+      astroCoffee.bindPopup("<a href='profile/astro-coffee'>Astro Coffee</a><br>Small, cozy cafe serving a variety of coffee & tea plus locally sourced baked goods & sandwiches.");
+      var greatLakes = L.marker([42.3503, -83.0602]).addTo(mymap);
+      greatLakes.bindPopup("<a href='profile/great-lakes-coffee'>Great Lakes Coffee Roasting Company</a><br>Cafe furnished with reclaimed wood & exposed ducts serving micro-roasted coffees, beer & snacks.");
+      var socraTea = L.marker([42.3545, -83.0613]).addTo(mymap);
+      socraTea.bindPopup("<a href='profile/socra-tea'>Socra Tea</a><br>Trendy & cozy hidden in the back walking area off the busy streets. Specialty teas & deserts, including gluten free!");
+      var dessertOasis = L.marker([42.3330, -83.0490]).addTo(mymap);
+      dessertOasis.bindPopup("<a href='profile/dessert-oasis'>Dessert Oasis Coffee Roasters</a><br>Comfortable coffee shop downtown with a small selection of food.");
+      var avalon = L.marker([42.3329, -83.0480]).addTo(mymap);
+      avalon.bindPopup("<a href='profile/avalon'>Avalon Café and Bakery</a><br>Casual counter serve for salads, sandwiches & organic, housemade pastries & fresh breads.");
+      var DIA = L.marker([42.3591, -83.0645]).addTo(mymap);
+      DIA.bindPopup("<a href='profile/DIA'>DIA Kresge Court</a><br>Atrium cafe at the Detroit Institute of Arts offering sandwiches, salads, pastries & coffee.");
+      var bikesCoffee = L.marker([42.3529, -83.0798]).addTo(mymap);
+      bikesCoffee.bindPopup("<a href='profile/bikes-and-coffee'>The Bottom Line</a><br>Small neighborhood coffee shop also offering bike repair services.");
+    }
+  },
+
+  // for (let i = 0; i =< profiles.length; i++) {
+  //     display profile.marker;
+  // }
+
+computed: {
+    filteredList() {
+      return this.postList.filter(post => {
+        return profile.name.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   }
+
 }
 </script>
 
@@ -110,12 +165,14 @@ h1 {
 }
 
 hr {
-  margin-top: 8%;
-  margin-bottom: 8%;
+  border: 1px solid rgb(255, 122, 122);
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .landing-description {
   font-family: 'DIN 2014', sans-serif;
+  font-weight: 300;
   color: #ACACAC;
   font-size: 2.7rem;
   text-align: center;
